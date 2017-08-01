@@ -86,4 +86,11 @@ class BinarySearchTree {
       }
     }
   }
+
+  _findMin(){
+    if(!this.left){
+      return this;
+    }
+    return this.left._findMin();
+  }
 }
