@@ -37,4 +37,27 @@ class BinarySearchTree {
       throw new Error("Key Error");
     }
   }
+
+  remove(key) {
+    if (this.key === key) {
+      if (this.left && this.right) {
+        const successor = this.right._findMin();
+        this.key = successor.key;
+        this.value = successor.value;
+        successor.remove(successor.key);
+      } else if (this.left) {
+        this.key._replaceWith(this.left);
+      } else if (this.right) {
+        this.key._replaceWith(this.right);
+      } else {
+        this._replaceWith(null);
+      }
+    } else if (key < this.key && this.left) {
+      this.left.remove(key);
+    } else if (key > this.key && this.right) {
+      this.right.remove(key);
+    } else {
+      throw new Error("There was an error removing your key. Try another.");
+    }
+  }
 }
